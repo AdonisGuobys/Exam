@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+  <h1 class="main-title">Search Results</h1>
+  <div class="notes-list">
+    {% for note in notes %}
+      <div class="note">
+        <p>Title:<br>{{note.title}}</p>
+        <p>Note:<br>{{note.content}}</p>
+        {% if note.image_filename %} 
+          <img src="{{ url_for('uploaded_file', filename=note.image_filename) }}" alt="{{ note.title }}" style="max-width: 300px;"> 
+        {% endif %} 
+        <p>Category:<br>{{ note.category.name }}</p>
+        <form method="get" action="{{ url_for('edit_note', note_id=note.id) }}">
+          <button type="submit">Edit</button>
+        </form>
+        <form method="post" action="{{ url_for('delete_note', note_id=note.id) }}">
+          <button type="submit">Delete</button>
+        </form>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

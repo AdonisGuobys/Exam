@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Change Category Name{% endblock %}
+
+{% block content %}
+<h1 class="main-title">Change Category Name</h1>
+<form action="{{ url_for('edit_category', category_id=category.id) }}" method="post">
+  {{ form.csrf_token }}
+  {{ form.name.label.text }} {{ form.name }}
+  <button type="submit">Save</button>
+</form>
+{% endblock %}
