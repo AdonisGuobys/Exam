@@ -100,9 +100,12 @@ def categories():
 
 @app.route('/notes', methods=['GET', 'POST'])
 def notes():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
     form = NoteForm()
     user_categories = Category.query.filter_by(user_id=session['user_id']).all()
-    form.category.choices = [(-1, 'No Categoy')] + [(c.id, c.name) for c in user_categories]
+    form.category.choices = [(-1, 'No Category')] + [(c.id, c.name) for c in user_categories]
+    selected_category_id = request.args.get('category_id', -1, type=int)
     if form.validate_on_submit():
         category_id = form.category.data if form.category.data != -1 else None
         note = Note(title=form.title.data, content=form.content.data, category_id=category_id, user_id=session['user_id'])
@@ -118,8 +121,11 @@ def notes():
         db.session.add(note)
         db.session.commit()
         return redirect(url_for('notes'))
-    user_notes = Note.query.filter_by(user_id=session['user_id']).all()
-    return render_template('notes.html', form=form, notes=user_notes)
+    if selected_category_id == -1:
+        user_notes = Note.query.filter_by(user_id=session['user_id']).all()
+    else:
+        user_notes = Note.query.filter_by(user_id=session['user_id'], category_id=selected_category_id).all()
+    return render_template('notes.html', form=form, notes=user_notes, user_categories=user_categories)
 
 
 

@@ -31,6 +31,18 @@
           <button type="submit">{{ form.submit.label.text }}</button>
         </form>
         <h1 class="sub-title">Your Notes</h1>
+        <form method="get">
+          <label>Filter by Category:</label>
+          <div class="dropdown">
+            <select name="category_id">
+              <option value="-1">All Categories</option>
+              {% for category in user_categories %}
+                <option value="{{ category.id }}" {% if category.id == selected_category_id %}selected{% endif %}>{{ category.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button type="submit">Filter</button>
+        </form>
         <div class="notes-list">
           {% for note in notes %}
             <div class="note">
