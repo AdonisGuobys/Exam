@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+      <h1 class="main-title">Register</h1>
+      <form method="post">
+        {{ form.csrf_token }}
+        <label>Username:</label>
+        {{ form.username }}
+        {% for error in form.username.errors %}
+          <span class="error">{{ error }}</span><br>
+        {% endfor %}
+        <label>Password:</label>
+        {{ form.password }}
+        {% for error in form.password.errors %}
+          <span class="error">{{ error }}</span><br>
+        {% endfor %}
+        <label>Confirm Password:</label>
+        {{ form.confirm_password }}
+        {% for error in form.confirm_password.errors %}
+          <span class="error">{{ error }}</span><br>
+        {% endfor %}
+        <button type="submit">Register</button>
+      </form>
+{% endblock %}

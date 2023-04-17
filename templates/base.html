@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>{% block title %}Title{% endblock %}</title>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <nav class="navbar">
+    <ul>
+      <li><a href="{{ url_for('index') }}">Home</a></li>
+      {% if not session.logged_in %}
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      <li><a href="{{ url_for('register') }}">Register</a></li>
+      {% else %}
+      <li><a href="{{ url_for('categories') }}">Categories</a></li>
+      <li><a href="{{ url_for('notes') }}">Notes</a></li>
+      <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+      <form action="{{ url_for('search_notes') }}" method="get" class="search-form">
+        <input type="text" name="query" placeholder="Search by title" required>
+      </form>
+    </ul>
+      {% endif %}
+  </nav>
+  <div class="content-wrapper">
+    <div class="container">
+    {% block content %}
+    {% endblock %}
+    </div>
+  </div>
+  <footer>
+    <p> About us, Contact us, Avoid us, Dont click here</p>
+  </footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

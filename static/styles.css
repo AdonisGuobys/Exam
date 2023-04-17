@@ -1,0 +1,258 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  background-image: linear-gradient(to bottom left, #add8e6, #98fb98);
+  background-attachment: fixed;
+}
+
+body {
+  position: relative;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+.content-wrapper {
+  flex-grow: 1;
+}
+
+h1, h2 {
+  color: #333;
+  margin-bottom: 0.8rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+p {
+  margin-bottom: 0.8rem;
+}
+
+.navbar {
+  background-image: linear-gradient(to bottom right, rgba(76, 170, 252, 0.74), rgba(48, 167, 43, 0.582));
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+
+.navbar ul li {
+  margin-right: 2rem;
+}
+
+.navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.container {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.container button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.container button:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.notes-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.note {
+  background-color: rgba(235, 232, 99, 0.671);
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: black;
+  font-weight: bold;
+  margin: 0 10px;
+  margin-bottom: 25px;
+  display: inline-block;
+  min-width: 350px;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.note:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.container .main-title {
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 25px;
+}
+
+.container .sub-title {
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 25px
+}
+
+.container .form-container {
+width: 100%;
+text-align: center;
+}
+
+.container form {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.container label {
+margin-top: 20px;
+}
+
+.about {
+text-align: center;
+}
+
+footer {
+background-color: rgba(51, 51, 51);
+color: #fff;
+text-align: center;
+padding: 1rem;
+width: 100%;
+}
+
+.footer p {
+margin-bottom: 0.8rem;
+}
+
+.footer a {
+color: #fff;
+text-decoration: none;
+transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+color: #ffa500;
+background-color: #fff;
+border-radius: 5px;
+padding: 5px;
+transition: background-color 0.3s, color 0.3s;
+}
+
+input[type="text"],
+input[type='number'],
+input[type="email"],
+input[type="password"],
+textarea {
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+font-size: 1rem;
+width: 100%;
+max-width: 400px;
+margin-top: 5px;
+margin-bottom: 10px;
+outline: none;
+transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type='number']:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+border-color: #4CAF50;
+box-shadow: 0 0 3px rgba(76, 175, 80, 0.4);
+}
+
+@media screen and (max-width: 768px) {
+.navbar ul {
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-around;
+}
+
+.navbar ul li {
+margin-right: 1rem;
+margin-bottom: 1rem;
+}
+
+.navbar ul li:last-child {
+margin-bottom: 0;
+}
+}
+
+@media (min-width: 768px) {
+.about {
+margin-left: 20%;
+margin-right: 20%;
+}
+}
+
+.error {
+color: red;
+font-size: 0.8em;
+font-weight: bold;
+}
+
+/* Bitch ass error not getting styled */
+.custom-error {
+color: red;
+font-size: 0.8em;
+font-weight: bold;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown select {
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  outline: white;
+}
+
+.dropdown select:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}

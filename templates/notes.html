@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Notes{% endblock %}
+
+{% block content %}
+      <h1 class="main-title">Create Note</h1>
+        <form method="post" enctype="multipart/form-data"> 
+          {{ form.csrf_token }}
+          <label>Title:</label>
+          {{ form.title }}
+          {% for error in form.title.errors %}
+            <p class="error-message">{{ error }}</p>
+          {% endfor %}
+          <label>Content:</label>
+          {{ form.content }}
+          {% for error in form.content.errors %}
+            <p class="error-message">{{ error }}</p>
+          {% endfor %}
+          <label>Category:</label>
+          <div class="dropdown">
+          {{ form.category }}
+          {% for error in form.category.errors %}
+            <p class="error-message">{{ error }}</p>
+          {% endfor %}
+          </div>
+          <label>Image:</label> 
+          {{ form.image }} 
+          {% for error in form.image.errors %} 
+            <p class="error-message">{{ error }}</p> 
+          {% endfor %} 
+          <button type="submit">{{ form.submit.label.text }}</button>
+        </form>
+        <h1 class="sub-title">Your Notes</h1>
+        <form method="get">
+          <label>Filter by Category:</label>
+          <div class="dropdown">
+            <select name="category_id">
+              <option value="-1">All Categories</option>
+              {% for category in user_categories %}
+                <option value="{{ category.id }}" {% if category.id == selected_category_id %}selected{% endif %}>{{ category.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button type="submit">Filter</button>
+        </form>
+        <div class="notes-list">
+          {% for note in notes %}
+            <div class="note">
+              <p>Title:<br>{{note.title}}</p>
+              <p>Note:<br>{{note.content}}</p>
+              {% if note.image_filename %} 
+                <img src="{{ url_for('uploaded_file', filename=note.image_filename) }}" alt="{{ note.title }}" style="max-width: 300px;"> 
+              {% endif %} 
+              <p>Category:<br>{{ note.category.name }}</p>
+              <form method="get" action="{{ url_for('edit_note', note_id=note.id) }}">
+                <button type="submit">Edit</button>
+              </form>      
+              <form method="post" action="{{ url_for('delete_note', note_id=note.id) }}">
+                {{ form.csrf_token }}
+                <button type="submit">Delete</button>
+              </form>
+            </div>
+          {% endfor %}
+        </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Note{% endblock %}
+
+{% block content %}
+      <h1 class="main-title">Edit Note</h1>
+        <form method="post" enctype="multipart/form-data"> 
+          {{ form.csrf_token }}
+          <label>Title:</label>
+          {{ form.title }}
+          {% for error in form.title.errors %}
+            <p class="error-message">{{ error }}</p>
+          {% endfor %}
+          <label>Content:</label>
+          {{ form.content }}
+          {% for error in form.content.errors %}
+            <p class="error-message">{{ error }}</p>
+          {% endfor %}
+          <label>Category:</label>
+          <div class="dropdown">
+            {{ form.category }}
+            {% for error in form.category.errors %}
+              <p class="error-message">{{ error }}</p>
+            {% endfor %}
+          </div>
+          <label>Image:</label> 
+          {{ form.image }} 
+          {% for error in form.image.errors %} 
+          <p class="error-message">{{ error }}</p> 
+          {% endfor %} 
+          {% if note.image_filename %} 
+            <p>Current image:</p> 
+            <img src="{{ url_for('uploaded_file', filename=note.image_filename) }}" alt="{{ note.title }}" style="max-width: 300px;"> 
+          {% endif %} 
+          <button type="submit">{{ form.submit.label.text }}</button>
+        </form>
+{% endblock %}
